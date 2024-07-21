@@ -31,7 +31,7 @@ function callGemini(prompt, temperature=0) {
 }
 
 function testGemini() {
-  const prompt = "What is 1+1";
+  const prompt = "1 + 1 =";
   const output = callGemini(prompt);
   console.log(prompt, output);
 }
