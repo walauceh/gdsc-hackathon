@@ -18,6 +18,6 @@ function createEvent(){
   // Creates an event in the script project's time zone and logs the ID
   var event = CalendarApp.getDefaultCalendar().createEvent('New test event',
     new Date(getTodaysDateTime()),
-    new Date('July 22, 2024 18:00:00'));
+    new Date('July 23, 2024 18:00:00'));
   console.log('Event ID: ' + event.getId());
 }
