@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f7f7f7;
+}
+
+#content {
+    text-align: center;
+}
+
+#calendar-container {
+    margin-top: 20px;
+}
+
+iframe {
+    border: 0;
+    width: 800px;
+    height: 600px;
+}
