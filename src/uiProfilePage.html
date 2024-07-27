@@ -1,76 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Your Website Title</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-        <link href = ' https://unpkg.com/boxicon@2.1.4/css/boxicons.min.css' rel = 'stylesheet'>
-        <style>
-            /* CSS styles */
-            body {
-                background-color: #3E606F;
-                font-family: 'Roboto', sans-serif;
-            }
-            header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 20px;
-                background-color: #3E606F;
-            }
-            section {
-                min-height: 100vh;
-                padding: 10rem 12% 10rem;
-            }
-            .home{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 15rem;
-            }
-            .home-content {
-                display : flex;
-                flex-direction: column;
-                align-items: baseline;
-                text-align: left;
-                justify-content: center;
-                margin-top: 3rem;
-            }
-            span {
-                color: var(--main-color);
-            }
-            
-        </style>
-    </head>
-    <body>
-        <header>
-
-        </header>
-        
-        <section class = "home" id = "home">
-            <div class = "home-content">
-                <h1>Hi, It's<span>Amelia</span></h1>
-                <h3 class=""text-animation">I'm a <span></span></h3>
-                <p>Front-end Developer</p>
-
-                <div class = "social icons">
-                    <a href = "#"><box-icon type='logo' name='linkedin'></box-icon></a>
-                    <a href = "#"><box-icon name='github' type='logo' ></box-icon></a>
-                    <a href = "#"><box-icon name='twitter' type='logo' ></box-icon></a>
-                </div> 
-                <div class = "btn-group">
-                    <a href="#" class = "btn">Hire Me</a>
-                    <a href="#contact" class = "btn">Contact</a>
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* CSS styles */
+        :root {
+            --main-color: #00ffee;
+            --main-bg-color: #2e4651;
+            --main-font-color: #fff;
+        }
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+        body {
+            background-color: var(--main-bg-color);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--main-font-color);
+            margin: 0;
+            padding: 0;
+        }
+        .back-button {
+            position: fixed;    
+            top: 2rem;
+            left: 2rem;
+            background: var(--main-color);
+            color: black;
+            border: none;
+            border-radius: 50%;
+            width: 5rem;
+            height: 5rem;
+            font-size: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--main-color);
+            transition: 0.3s ease-in-out;
+            z-index: 10;
+        }
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px var(--main-color);
+        }
+        section {
+            min-height: 100vh;
+            padding: 0rem 10% 0; /* Reduced top padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 5rem;
+        }
+        .home-content {
+            max-width: 50%;
+        }
+        .home-content h1 {
+            font-size: 7rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .home-content h3 {
+            font-size: 3.5rem;
+            margin: 1rem 0;
+        }
+        .home-content p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            max-width: 40rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            background: var(--main-color);
+            box-shadow: 0 0 25px var(--main-color);
+            border-radius: 4rem;
+            font-size: 1.6rem;
+            color: black;
+            border: 2px solid transparent;
+            font-weight: 600;
+            transition: 0.3s ease-in-out;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 2rem;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--main-color);
+        }
+        .btn-group {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .btn-group a:nth-of-type(2) {
+            background-color: black;
+            color: var(--main-color);
+            border: 2px solid var(--main-color);
+            box-shadow: 0 0 25px transparent;
+        }
+        .btn-group a:nth-of-type(2):hover {
+            box-shadow: 0 0 25px var(--main-color);
+            background-color: var(--main-color);
+            color: black;
+        }
+        .home-img {
+            max-width: 40%;
+            width: 100%;
+            height: auto;
+        }
+        .home-img img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            box-shadow: 0 0 25px var(--main-color);
+            cursor: pointer;
+            transition: 0.4s ease-in-out;
+            object-fit: cover;
+        }
+        .home-img img:hover {
+            box-shadow: 0 0 25px var(--main-color),
+                        0 0 50px var(--main-color),
+                        0 0 100px var(--main-color);
+        }
+        span{
+            color: var(--main-color);
+        }
+    </style>
+    
+</head>
+<body>
+    <button class="back-button" onclick="history.back()">
+        &larr;
+    </button>
+    
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1>Hi, It's <span>Amelia</span></h1>
+            <h3>I'm a <span>Front-end Developer</span></h3>
+            <div class="btn-group">
+                <a href="#" class="btn">Log Out</a>
+                <a href="#editProfile" class="btn">Edit Profile</a>
             </div>
-
-                <div>
-                    <img src = "cat.jpg" alt = "hero">
-                </div>
-
-
-        </section>
-
-    </body>
+        </div>
+        <div class="home-img">
+            <img src="cat.jpg" alt="Amelia's picture">
+        </div>
+    </section>
+</body>
 </html>
