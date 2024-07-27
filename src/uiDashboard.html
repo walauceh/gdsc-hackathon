@@ -8,11 +8,11 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #3E606F;
             margin: 0;
             padding: 0;
             display: flex;
-            height: 100vh;
+            height: 160vh;
         }
         .sidebar {
             width: 250px;
@@ -21,7 +21,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 20px;
+            padding-top: 50px;
         }
         .sidebar img {
             width: 100px;
@@ -65,24 +65,21 @@
         }
         .dashboard {
             display: flex;
+            flex-direction: column;
             margin-top: 20px;
         }
-        .courses, .calendar, .homework-progress {
+        .courses, .reminders, .task-list {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-right: 20px;
-            flex: 1;
+            margin-bottom: 20px;
         }
-        .calendar, .homework-progress {
-            flex: 0.5;
-        }
-        .courses h2, .calendar h2, .homework-progress h2 {
+        .courses h2, .reminders h2, .task-list h2 {
             margin-top: 0;
         }
-        .task-list, .reminders, .progress-track {
-            margin-bottom: 20px;
+        .task-list {
+            flex: 1;
         }
         .task-list h3, .reminders h3, .progress-track h3 {
             margin-top: 0;
@@ -109,54 +106,104 @@
             padding-right: 10px;
             line-height: 20px;
         }
+        .dropdown-selector {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .dropdown-selector select {
+            background-color: #3E606F;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+        .row > div {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <img src="logo.png" alt="Logo">
-        <a href="#">Overview</a>
-        <a href="#">Courses</a>
-        <a href="#">Messages</a>
-        <a href="#">Resources</a>
-        <a href="#">Goals</a>
-        <a href="#">Settings</a>
-        <div class="upgrade">Upgrade your plan to Premium</div>
+        <img src="profile.jpg" alt="Profile Picture">
+        <a href="#">Dashboard</a>
+        <a href="#">Calendar</a>
+        <a href="#">Profile</a>
     </div>
     <div class="main-content">
         <div class="header">
             <h1>Dashboard</h1>
-            <img src="profile.jpg" alt="Profile Picture">
         </div>
         <div class="dashboard">
-            <div class="courses">
-                <h2>Assigned Task List</h2>
-                <div class="task-list">
-                    <div class="task-item">Task 1: Design UI for the new project</div>
-                    <div class="task-item">Task 2: Develop login authentication</div>
-                    <div class="task-item">Task 3: Write unit tests for module X</div>
+            <div class="row">
+                <div class="courses">
+                    <h2>Assigned Task List</h2>
+                    <div class="view-selector">
+                        <button class="active">All</button>
+                        <button>Active</button>
+                        <button>Completed</button>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-item">Figma Basics</div>
+                        <div class="task-item">UX Research</div>
+                        <div class="task-item">Mobile Design</div>
+                    </div>
+                </div>
+                <div class="reminders">
+                    <h2>Task Reminders & Deadlines</h2>
+                    <div class="reminder-item">
+                        <input type="checkbox" id="reminder1">
+                        <label for="reminder1">Reminder 1: Meeting with team</label>
+                    </div>
+                    <div class="reminder-item">
+                        <input type="checkbox" id="reminder2">
+                        <label for="reminder2">Reminder 2: Submit report</label>
+                    </div>
+                    <div class="reminder-item">
+                        <input type="checkbox" id="reminder3">
+                        <label for="reminder3">Reminder 3: Code review</label>
+                    </div>
                 </div>
             </div>
-            <div class="calendar">
-                <h2>June 2022</h2>
+            <div class="task-list">
+                <h2>Project Progress Tracking</h2>
+                <div class="dropdown-selector">
+                    <label for="task-view">View: </label>
+                    <select id="task-view">
+                        <option value="all">All</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="past">Past</option>
+                        <option value="starred">Starred</option>
+                    </select>
+                </div>
                 <div class="task-list">
-                    <div class="task-item">Mon: Figma Basics</div>
-                    <div class="task-item">Tue: Mobile Design</div>
-                    <div class="task-item">Wed: Figma Basics</div>
-                    <div class="task-item">Thu: UX Research</div>
-                    <div class="task-item">Fri: Mobile Design</div>
-                    <div class="task-item">Sat: UX Research</div>
-                </div>
-            </div>
-            <div class="homework-progress">
-                <h2>Overall Task Progress</h2>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 50%;">50%</div>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 25%;">25%</div>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 75%;">75%</div>
+                    <div class="task-item">
+                        <div>Project 1: Design UI for the new project</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 50%;">50%</div>
+                        </div>
+                        <div>Remaining days: 10</div>
+                    </div>
+                    <div class="task-item">
+                        <div>Project 2: Develop login authentication</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 25%;">25%</div>
+                        </div>
+                        <div>Remaining days: 15</div>
+                    </div>
+                    <div class="task-item">
+                        <div>Project 3: Write unit tests for module X</div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;">75%</div>
+                        </div>
+                        <div>Remaining days: 5</div>
+                    </div>
                 </div>
             </div>
         </div>
