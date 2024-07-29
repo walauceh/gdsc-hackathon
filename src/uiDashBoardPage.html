@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #3E606F;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 160vh;
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            background-color: #252525;
+            color: white;
+            align-items: start;
+            padding-top: 20px;
+        }
+        .sideheader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .sidelogo {
+            color: #fff; 
+            font-size: 40px; 
+            text-decoration: none; 
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            height: 50px;
+            margin: 10px;
+        }
+        .sidelogo span b {
+            color: #00ffee; 
+        }
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            width: 75%;
+            background-color: #333;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .sidebar .LogOut {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            width: 80%;
+            margin: 30px auto 0 auto;
+            text-decoration: none;
+        }
+        .sidebar .LogOut:hover {
+            background-color: #45a049;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .header {
+            background-color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .courses, .reminders, .task-list {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .courses h2, .reminders h2, .task-list h2 {
+            margin-top: 0;
+        }
+        .task-list {
+            flex: 1;
+        }
+        .task-list h3, .reminders h3, .progress-track h3 {
+            margin-top: 0;
+        }
+        .task-item, .reminder-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .task-item:last-child, .reminder-item:last-child {
+            border-bottom: none;
+        }
+        button {
+            background: none;         
+            border: none;            
+            color: black;          
+            font-size: 18px;         
+            cursor: pointer;          
+            padding: 3;               
+            margin: 0;             
+            text-align: left;         
+            display: inline;          
+            border-bottom: 1px solid transparent; 
+            transition: color 0.3s, border-bottom 0.3s; 
+        }
+        button:hover {
+            color: #00ffee;        
+            border-bottom: 1px solid #00ffee; 
+        }
+        .progress-bar {
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+        .progress {
+            background-color: #4CAF50;
+            height: 100%;
+            text-align: right;
+            color: white;
+            padding-right: 20px;
+            line-height: 20px;
+        }
+        .dropdown-selector {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .dropdown-selector select {
+            background-color: #3E606F;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+        .row > div {
+            flex: 1;
+        }
+        .slideshow {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        /* Style for slides */
+        .slide img {
+            width: 380px;
+            height: 170px;
+            margin-left: 7px;
+            margin-top: 15px;
+        }
+        /* Fade effect */
+        .fade {
+            animation: fade 5s ease-in-out infinite;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            padding: 6px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.6s ease;
+            border-radius: 3px;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .prev {
+            margin-left: 100px;
+        }
+        .next {
+            margin-left: 150px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <header class ="sideheader">
+            <a href="#" class="sidelogo">Plan<span><b>Pal</b></span></a>
+        </header>
+        <a href="#">Dashboard</a>
+        <a href="#">Calendar</a>
+        <a href="#">Profile</a>
+        <a href="#" class="LogOut">Log Out</a>
+    </div>
+    <div class="main-content">
+        <div class="header">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="dashboard">
+            <div class="row">
+                <div class="courses">
+                    <h2>Assigned Task List</h2>
+                    <div class="view-selector">
+                        <button>All</button>
+                        <button>Active</button>
+                        <button>Completed</button>
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                    <div class="slideshow">
+                        <div class="slide fade">
+                            <img src="https://europassbarcelona.es/wp-content/uploads/2020/09/innovation.jpg" alt="Slide 1">
+                        </div>
+                        <div class="slide fade">
+                            <img src="https://tme.net/wp-content/uploads/2024/03/Screen-Shot-2024-03-03-at-6.09.12-PM.png" alt="Slide 2">
+                        </div>
+                        <div class="slide fade">
+                            <img src="https://th.bing.com/th/id/OIP.jIH19TznTrnVCxdhrggLQgAAAA?rs=1&pid=ImgDetMain" alt="Slide 3">
+                        </div>
+                    </div>
+                </div>
+                <div class="reminders">
+                    <h2>Task Reminders & Deadlines</h2>
+                    <div class="reminder-item">
+                        <input type="checkbox" id="reminder1">
+                        <label for="reminder1">Reminder 1: Meeting with team</label>
+                    </div>
+                    <div class="reminder-item">
+                        <input type="checkbox" id="reminder2">
+                        <label for="reminder2">Reminder 2: Submit report</label>
+                    </div>
+                    <div class="reminder-item">
+                        <input type="checkbox" id="reminder3">
+                        <label for="reminder3">Reminder 3: Code review</label>
+                    </div>
+                </div>
+            </div>
+            <div class="task-list">
+                <h2>Project Progress Tracking</h2>
+                <div class="dropdown-selector">
+                    <label for="task-view">View: </label>
+                    <select id="task-view">
+                        <option value="all">All</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <div class="task-item">
+                    <h3>Project 1: Design UI for the new project</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 50%;">50%</div>
+                    </div>
+                    <p>Remaining days: 10</p>
+                </div>
+                <div class="task-item">
+                    <h3>Project 2: Develop login authentication</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 25%;">25%</div>
+                    </div>
+                    <p>Remaining days: 15</p>
+                </div>
+                <div class="task-item">
+                    <h3>Project 3: Write unit tests for module X</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%;">75%</div>
+                    </div>
+                    <p>Remaining days: 5</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides();
+        }
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            if (slideIndex >= slides.length) {slideIndex = 0}
+            if (slideIndex < 0) {slideIndex = slides.length - 1}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slides[slideIndex].style.display = "block";  
+        }
+    </script>
+</body>
+</html>
