@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Calendar Embed</title>
+    <style>
+        :root {
+            --main-color: #00ffee;
+            --main-bg-color: #2e4651;
+            --main-font-color: #fff;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            background-color: var(--main-bg-color);
+            font-family: Arial, sans-serif;
+            color: var(--main-font-color);
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            background-color: #252525;
+            color: white;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+        }
+        .sideheader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .sideheader a {
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .sideheader a:hover {
+            color: var(--main-color);
+            box-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color), 0 0 30px var(--main-color);
+        }
+        .sideheader b {
+            color: var(--main-color);
+            font-size: 24px;
+        }
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 10px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            width: 210px;
+            background-color: #333;
+            margin: 5px auto;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .sidebar a:hover {
+            background-color: #555;
+        }
+        .LogOut {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            width: 200px;
+            margin: 20px auto 0;
+            cursor: pointer;
+        }
+        iframe {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            height: 100vh;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <header class="sideheader">
+            <a href="#" onclick="loadPage('uiDashBoard')" class="sidelogo">Plan<span><b>Pal</b></span></a>
+        </header>
+        <a href="#" onclick="loadPage('uiDashBoard')" class="a">Dashboard</a>
+        <a href="#" onclick="loadPage('uiCalendarPage')" class="b">Calendar</a>
+        <a href="#" onclick="loadPage('uiProfilePage')" class="c">Profile</a>
+        <a href="#" onclick="logout()" class="LogOut">Log Out</a>
+    </div>
+    <iframe id="calendarIframe" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+    <script>
+      function setCalendar(cals) {
+        google.script.run.withSuccessHandler(function(timezone) {
+          var view = "MONTH"; // can be WEEK or AGENDA
+          var calSrc = "https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=" + timezone + "&bgcolor=%23ffffff&showPrint=0&title=My%20Calendar&mode=" + view + cals + "&color=%23039BE5&color=%239E69AF&color=%23795548&color=%230B8043";
+          document.getElementById("calendarIframe").src = calSrc;
+        }).getTz();
+      }
+
+      function getCalendar() {
+        google.script.run.withSuccessHandler(setCalendar).getCal();
+      }
+
+      document.addEventListener("DOMContentLoaded", getCalendar);
+
+      function loadPage(page) {
+        google.script.run.withSuccessHandler(function(html) {
+          document.open();
+          document.write(html);
+          document.close();
+        }).getPage(page);
+      }
+
+      function logout() {
+        google.script.run.logout();
+        alert("You have successfully logged out!");
+      }
+    </script>
+</body>
+</html>

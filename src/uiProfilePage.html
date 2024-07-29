@@ -3,16 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Calendar Integration</title>
-    <link rel="stylesheet" href="uiProfilePage.css">
+    <title>Your Website Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* CSS styles */
+        :root {
+            --main-color: #00ffee;
+            --main-bg-color: #2e4651;
+            --main-font-color: #fff;
+        }
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+        body {
+            background-color: var(--main-bg-color);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--main-font-color);
+            margin: 0;
+            padding: 0;
+        }
+        .back-button {
+            position: fixed;    
+            top: 2rem;
+            left: 2rem;
+            background: var(--main-color);
+            color: black;
+            border: none;
+            border-radius: 50%;
+            width: 5rem;
+            height: 5rem;
+            font-size: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--main-color);
+            transition: 0.3s ease-in-out;
+            z-index: 10;
+        }
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px var(--main-color);
+        }
+        section {
+            min-height: 100vh;
+            padding: 0rem 10% 0; /* Reduced top padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 5rem;
+        }
+        .home-content {
+            max-width: 50%;
+        }
+        .home-content h1 {
+            font-size: 7rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .home-content h3 {
+            font-size: 3.5rem;
+            margin: 1rem 0;
+        }
+        .home-content p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            max-width: 40rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            background: var(--main-color);
+            box-shadow: 0 0 25px var(--main-color);
+            border-radius: 4rem;
+            font-size: 1.6rem;
+            color: black;
+            border: 2px solid transparent;
+            font-weight: 600;
+            transition: 0.3s ease-in-out;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 2rem;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--main-color);
+        }
+        .btn-group {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .btn-group a:nth-of-type(2) {
+            background-color: black;
+            color: var(--main-color);
+            border: 2px solid var(--main-color);
+            box-shadow: 0 0 25px transparent;
+        }
+        .btn-group a:nth-of-type(2):hover {
+            box-shadow: 0 0 25px var(--main-color);
+            background-color: var(--main-color);
+            color: black;
+        }
+        .home-img {
+            max-width: 40%;
+            width: 100%;
+            height: auto;
+        }
+        .home-img img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            box-shadow: 0 0 25px var(--main-color);
+            cursor: pointer;
+            transition: 0.4s ease-in-out;
+            object-fit: cover;
+        }
+        .home-img img:hover {
+            box-shadow: 0 0 25px var(--main-color),
+                        0 0 50px var(--main-color),
+                        0 0 100px var(--main-color);
+        }
+        span{
+            color: var(--main-color);
+        }
+    </style>
+    
 </head>
 <body>
-    <div id="content">
-        <h1>Google Calendar Integration</h1>
-        <button id="login-button">Login with Google</button>
-        <div id="calendar-container"></div>
-    </div>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="uiProfilePage.js"></script>
+    <button class="back-button" onclick="loadPage('uiDashBoard')">
+        &larr;
+    </button>
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1>Hi, It's <span id="employeeName"></span></h1>
+            <h3>I'm a <span id="employeePosition"></span></h3>
+            <p id="employeeEmail"></p>
+            <div class="btn-group">
+                <a href="#" onclick="logout()" class="btn">Log Out</a>
+                <a href="#editProfile" class="btn">Edit Profile</a>
+            </div>
+        </div>
+        <div class="home-img">
+            <img id="employeeImage" alt="Employee's picture">
+        </div>
+    </section>
+    
+    <script>
+        function loadPage() {
+          google.script.run.withSuccessHandler(function(data) {
+            console.log("Received data:", data); // Debugging
+            if (data) {
+              document.getElementById('employeeName').textContent = data.name;
+              document.getElementById('employeePosition').textContent = data.position;
+              document.getElementById('employeeEmail').textContent = data.email;
+              document.getElementById('employeeImage').src = data.imageLink;
+            } else {
+              document.getElementById('employeeName').textContent = "User not found";
+              document.getElementById('employeePosition').textContent = "";
+              document.getElementById('employeeEmail').textContent = "";
+              document.getElementById('employeeImage').src = "";
+            }
+          }).extractData();
+        }
+        
+        // Call loadPage when the page loads
+        window.onload = function() {
+          loadPage();
+        };
+
+        function logout() {
+          google.script.run.logout();
+          alert("You have successfully logged out!");
+        }
+    </script>
 </body>
 </html>

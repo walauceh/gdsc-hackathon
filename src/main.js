@@ -1,23 +1,40 @@
 function doGet() {
-    return HtmlService.createHtmlOutputFromFile('uiMain');
+    return HtmlService.createHtmlOutputFromFile('uiDashBoard')
+      .setTitle('Your Website Title')
+      .setSandboxMode(HtmlService.SandboxMode.IFRAME);
 }
 
-function getTodaysDate() {
-  var date = Utilities.formatDate(new Date(), "GMT+8", "dd/MM/yyyy")
-  Logger.log(date)
-  return date
+function getPage(page) {
+  return HtmlService.createHtmlOutputFromFile(page).getContent()
 }
 
-function getTodaysDateTime() {
-  var date = Utilities.formatDate(new Date(), "GMT+8", "MMMMMMMMM dd, yyyy HH:mm:ss")
-  Logger.log(date)
-  return date
-}
+function extractData() {
+  var sheetId = '1GfzgoWtCCgKEtB_9CoID9vczb5G2VAuX7Cqmu8fbreQ'; // Replace with your actual Sheet ID
+  var spreadsheet = SpreadsheetApp.openById(sheetId);
+  var sheet = spreadsheet.getSheetByName("Employee Data"); // Replace "Sheet1" with your sheet name
 
-function createEvent(){
-  // Creates an event in the script project's time zone and logs the ID
-  var event = CalendarApp.getDefaultCalendar().createEvent('New test event',
-    new Date(getTodaysDateTime()),
-    new Date('July 23, 2024 18:00:00'));
-  console.log('Event ID: ' + event.getId());
+  var data = sheet.getDataRange().getValues();
+  var userEmail = Session.getActiveUser().getEmail(); // Get logged-in user’s email
+  
+  Logger.log('Logged-in user email: ' + userEmail); // Log user email
+  Logger.log('hi  ')
+  for (var i = 1; i < data.length; i++) {
+    var employeeName = data[i][0];
+    var employeeEmail = data[i][1];
+    var employeePosition = data[i][2];
+    var employeeImageLink = data[i][3];
+    
+    Logger.log('Checking email: ' + employeeEmail); // Log each email in the sheet
+
+    if (employeeEmail.trim() === userEmail.trim()) {
+      Logger.log('User found: ' + JSON.stringify({ name: employeeName, email: employeeEmail, position: employeePosition, imageLink: employeeImageLink }));
+      return {
+        name: employeeName,
+        email: employeeEmail,
+        position: employeePosition,
+        imageLink: employeeImageLink
+      };
+    }
+  }
+  return null;
 }

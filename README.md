@@ -1,5 +1,9 @@
-# gdsc-hackathon
+# GDSC Hackathon (Team BeSuperBs)
 
-**welcome to the readme file**
+## Welcome to the README file of PlanPal
 
-_there is nothing to see yet so far_
+**This GitHub Repo contains the raw code of our project. To view the prototype web app, click here -> [Prototype Web App](https://script.google.com/macros/s/AKfycbxz9CC5bQg3YmM-MBwmT8ABct9IliHO5Ub6xBMi0C-hVtQQlipn8MjfU-h-eB53AVbLQA/exec)**
+
+**Check out our Pitch Deck on Canva by clicking here -> [Canva Pitch Deck](https://www.canva.com/design/DAGLrI5NpWs/KgyJ15ZluLSv_LQB6OUvbA/view?utm_content=DAGLrI5NpWs&utm_campaign=designshare&utm_medium=link&utm_source=editor)**
+
+_This is just a prototype version, many improvements to backend functions are to be expected in the final round...stay tuned!!_
